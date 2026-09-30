@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ドミニオン 王国カード</title>
+
+<style>
+    body {
+        font-family: sans-serif;
+        background: #f3f3f3;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 10px;
+        background: #4caf50;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #43a047;
+    }
+
+    #result {
+        max-width: 500px;
+        margin: 30px auto;
+    }
+
+    .card {
+        background: white;
+        margin: 8px 0;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .number {
+        display: inline-block;
+        width: 35px;
+        color: #888;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>ドミニオン</h1>
+<div class="subtitle">今回の王国カード</div>
+
+<button onclick="generateCards()">🎲 ランダム生成</button>
+
+<div id="result"></div>
+
+<script>
+const cards = [
+    "地下貯蔵庫",
+    "礼拝堂",
+    "堀",
+    "前駆者",
+    "商人",
+    "家臣",
+    "村",
+    "工房",
+    "役人",
+    "庭園",
+    "民兵",
+    "金貸し",
+    "密猟者",
+    "改築",
+    "鍛冶屋",
+    "玉座の間",
+    "山賊",
+    "議事堂",
+    "祝祭",
+    "研究所",
+    "書庫",
+    "市場",
+    "鉱山",
+    "衛兵",
+    "魔女",
+    "職人"
+];
+
+function generateCards() {
+
+    // 26枚から重複なしで10枚選ぶ
+    const selectedIndexes = [];
+
+    while (selectedIndexes.length < 10) {
+        const n = Math.floor(Math.random() * 26);
+
+        if (!selectedIndexes.includes(n)) {
+            selectedIndexes.push(n);
+        }
+    }
+
+    // 元々決めた26枚の順番に戻す
+    selectedIndexes.sort((a, b) => a - b);
+
+    // 表示
+    const result = document.getElementById("result");
+
+    result.innerHTML = selectedIndexes.map((index, displayIndex) => `
+        <div class="card">
+            <span class="number">${displayIndex + 1}.</span>
+            ${cards[index]}
+        </div>
+    `).join("");
+}
+
+// 最初から1回生成
+generateCards();
+</script>
+
+</body>
+</html>
